@@ -1,0 +1,43 @@
+.component-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.video-display {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+
+.buttons-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #3e8e41;
+}
+
+video {
+    width: 100%;
+    height: auto;
+    max-width: 720px;
+    border-radius: 25px;
+}
+
+

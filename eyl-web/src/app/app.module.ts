@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './modules/app-routing.module';
 import { AppComponent } from './app.component';
-import { CameraDisplayComponent } from './camera-display/camera-display.component';
+import { HomeComponent } from './pages/home/home.component';
+import { CameraDisplayComponent } from './components/camera-display/camera-display.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CameraDisplayComponent
+    CameraDisplayComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
