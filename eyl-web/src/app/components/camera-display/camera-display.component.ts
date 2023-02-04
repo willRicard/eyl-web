@@ -20,10 +20,9 @@ export class CameraDisplayComponent implements OnInit {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       console.log("Devices: ", navigator.mediaDevices)
       navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-        this.videoUrl = stream;
-        console.log("videoUrl: ", this.videoUrl)
+        let video = document.querySelector('video');
+        if ( video) video.srcObject = stream;
       }).catch(error => {
-        console.log("Error: ", error)
       })
     }
   }
