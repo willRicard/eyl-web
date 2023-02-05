@@ -12,7 +12,11 @@
 
     <div class="overview">
         <!--    Overview Progress Bar-->
-        <h2>Overview</h2>
+        <div class="overview-header">
+            <h2>Overview</h2>
+            <h2>{{ progress }} % </h2>
+        </div>
+        
         <div class="progress-container">
             <div class="progress-bar" [style.width.%]="progress"></div>
         </div>
