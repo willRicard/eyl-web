@@ -1,8 +1,34 @@
 <div class="page">
+    <!--   Header    -->
     <div class="header">
-        <h1>EYL</h1>
+        <h1>ScanHealthy</h1>
     </div>
+
+    <!--   Camera Display -->
     <div class="camera">
         <app-camera-display></app-camera-display>
+    </div>
+
+
+    <div class="overview">
+        <!--    Overview Progress Bar-->
+        <h2>Overview</h2>
+        <div class="progress-container">
+            <div class="progress-bar" [style.width.%]="progress"></div>
+        </div>
+
+        <!--    Nutrition Facts Table-->
+        <div class="nutrition-values">
+            <h2>Nutrition Values</h2>
+            <li *ngFor="let item of nutritionArray" class="list-item"> 
+                <span>{{ item.key }} :</span>
+                <div class="units">
+                    <span>{{ item.value }}</span>
+                    <div class="progress-item">
+                        <div class="progress-bar" [style.width.%]="progressUnits[nutritionArray.indexOf(item)]"></div>
+                    </div> 
+                </div>
+            </li>
+        </div>
     </div>
 </div>

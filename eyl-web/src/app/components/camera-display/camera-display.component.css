@@ -12,10 +12,11 @@
 .buttons-wrapper {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: mediumpurple;
     color: white;
     border: none;
     border-radius: 10px;
@@ -38,6 +39,17 @@ video {
     height: auto;
     max-width: 720px;
     border-radius: 25px;
+}
+
+.output {
+    display: flex;
+    justify-content: center;
+}
+
+#photo {
+    border-radius: 10px;
+    border-style: solid;
+    border-color: limegreen;
 }
 
 

@@ -1,15 +1,14 @@
 <div class="component-wrapper">
     <div class="video-display">
-        <video autoplay></video>
+        <video id="video" autoplay></video>
     </div>
     <div class="buttons-wrapper">
-        <button>Take Picture</button>
-        <button [disabled]="true">Get Nutrition Values</button>
-        <button [disabled]="false">Get Recommendations</button>
+        <button (click)='takePicture()'>Take Picture</button>
+        <button>Get Nutrition Values</button>
+        <button>Get Recommendations</button>
     </div>
-    <div class="nutrition-values">
-        <h3>Nutrition Values</h3>
-        <ul>Fat</ul>
-        <ul>Protein</ul>
-    </div>
+    <!-- <canvas id="canvas" width="0" height="0"></canvas>
+    <div class="output">
+        <img id="photo" alt="L'image capturée sera affichée dans cette boîte.">
+    </div> -->
 </div>

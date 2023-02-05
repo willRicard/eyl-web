@@ -1,9 +1,61 @@
 .page {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .header {
     display: flex;
     justify-content: center;
+}
+
+.list-item {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+}
+
+.list-item:nth-child(odd) {
+    background-color: lightgray;
+}
+
+.list-item:nth-child(even) {
+    background-color: white;
+}
+
+.overview {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 720px;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    height: 15px;
+    width: 100%;
+    background-color: lightgray;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-item {
+    height: 10px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: darkgray;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: mediumpurple;
+    border-radius: 18px;
+    transition: width 0.2s ease-in-out;
+}
+
+.units {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
 }
