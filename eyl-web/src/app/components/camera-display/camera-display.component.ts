@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
@@ -8,6 +8,8 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 })
 
 export class CameraDisplayComponent implements OnInit {
+  @Output() newItemEvent = new EventEmitter<string>();
+
   videoOptions = {
     width: {min: 1024}, 
     height: {min: 576} 
@@ -15,7 +17,7 @@ export class CameraDisplayComponent implements OnInit {
 
   videoUrl: SafeResourceUrl | undefined;
 
-  pictureWidth: number = 480;
+  pictureWidth: number = 1080;
   pictureHeight: number = 0;
 
   video: HTMLVideoElement | null = null;
@@ -45,9 +47,29 @@ export class CameraDisplayComponent implements OnInit {
     this.canvas?.setAttribute("height", this.pictureHeight.toString());
   }
 
+  dataURItoBlob(dataURI: string) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+      byteString = atob(dataURI.split(',')[1]);
+    else
+      byteString = unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+  
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ia], {type:mimeString});
+  }
+
   takePicture() {
     let canvasElement = (this.canvas as HTMLCanvasElement)
     const context = canvasElement.getContext("2d");
+    let facts: number[] = [];
     
     if (this.pictureWidth && this.pictureHeight) {
       canvasElement.width = this.pictureWidth;
@@ -55,10 +77,30 @@ export class CameraDisplayComponent implements OnInit {
       if (this.video)
       context?.drawImage((this.video as HTMLVideoElement), 0, 0, this.pictureWidth, this.pictureHeight);
       const data = canvasElement.toDataURL("image/png");
+      const multipart = new FormData();
+      multipart.append('image', this.dataURItoBlob(data));
+      fetch('http://141.145.213.73/nutritionExtract/', {
+        method: 'POST',
+        body: multipart
+      }).then((response) => {
+        (window as any).response = response;
+        return response.json()
+      })
+      .then((json) => {
+        (window as any).myJson = json;
+        facts.push(json);
+        this.newItemEvent.emit(JSON.stringify(facts[0]));
+      });
+
+      console.log("multipart: " , multipart)
+      console.log(this.dataURItoBlob(data))
+      
       this.photo?.setAttribute("src", data);
       canvasElement.width = 0;
       canvasElement.height = 0;
     }
+
+    
   }
 
 }

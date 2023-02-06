@@ -7,7 +7,11 @@ export const rawDailyNeeds = {
     'Polyunsaturated Fat': '9 g', 
     'Trans Fat': '10.0 g', 
     'Other Carbohydrate': '12 g',
-    'Sodium': '0.1 g'
+    'Carbohydrate': '20 g',
+    'Saturated Fat': '16.6 g',
+    'Fibres': '25.0 g',
+    'Sodium': '2300 mg',
+    'Calcium': '1000 mg'
   };
 
 export const arrayDailyNeeds = Object.entries(rawDailyNeeds).map(([key, value]) => ({ key, value }));

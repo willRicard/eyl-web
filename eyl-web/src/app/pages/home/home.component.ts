@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { arrayDailyNeeds } from 'src/app/classes/seuils';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent {
   nutritionValues = {
     'Dietary Fiber': '0.0 g', 
@@ -16,7 +18,6 @@ export class HomeComponent {
     'Polyunsaturated Fat': '0.0 g', 
     'Trans Fat': '0.0 g' 
   };
-
   nutritionArray = Object.entries(this.nutritionValues).map(([key, value]) => ({ key, value }));
   nutritionUnits: { [id: string]: number; }[] = [];
   dailyNeeds: { [id: string]: number; }[] = [];
@@ -45,5 +46,36 @@ export class HomeComponent {
     })
   }
 
+  replaceNutriFacts(facts: any) {
+    this.nutritionValues = JSON.parse(facts);
+    console.log(this.nutritionValues);
+    this.nutritionArray = Object.entries(this.nutritionValues).map(([key, value]) => ({ key, value }));
+    console.log('Array: ', this.nutritionArray);
+    this.progressUnits = [];
+    this.nutritionArray.map((item) => {
+      let nutriFact = this.dailyNeeds.find((nutriFact) => Object.keys(nutriFact)[0] == item.key);
+      if (nutriFact && item) {
+        this.progressUnits.push((parseFloat(item.value) / Object.values(nutriFact)[0] * 100));
+      };
+      console.log('Item: ', parseFloat(item.value))
+      console.log('nutriFact: ', nutriFact)
+      if (nutriFact)
+        console.log('nutriFact Value: ', Object.values(nutriFact)[0])
+    })
+    this.progress = this.average(this.progressUnits, this.progressUnits.length);
+    console.log(this.nutritionArray)
+  }
+
+  average(a: number[], n: number): number
+  {
+    // Find sum of array element
+    let sum = 0;
+    for (let i=0; i<n; i++)
+       sum += a[i];
+ 
+    return sum/n;
+  }
 
 }
+
+
